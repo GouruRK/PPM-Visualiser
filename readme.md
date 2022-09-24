@@ -15,6 +15,7 @@ This is one of my very first school project. You can find the original subject [
 * This project support PBM, PGM and PPM file format (ascii or binary, so versions P1, P2, P3, P4, P5 and P6)
 * You can rotate the image directly from command line, or by pressing 'r'
 * You can zoom on the image from command line (not really a zoom, but by considering that 1 pixel of the image represent x pixel on your screen)
+* Convert a file to an other PPM format
 
 ## How to install
 
@@ -46,7 +47,15 @@ python3 main.py <file> -p <size>
 
 # Rotate
 python3 main.py <file> -r <0 (default) | 90 | 180 | 270>
+
+# Create a new file by converting an existing file to a specific format
+python3 main.py <file> -c <P1 | P2 | P3 | P4 | P5 | P5>
+
+# Indicate the name of the new converted file
+python3 main.py <file> -c <P1 | P2 | P3 | P4 | P5 | P5> -o <name>
 ```
+
+Note that windows user may type `py` instead of `python3`/
 
 ## Next step ?
 
