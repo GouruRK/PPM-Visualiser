@@ -40,16 +40,18 @@ class Bitmap:
                 elif self.rotate == 90:
                     r_x, r_y = y, x
                 elif self.rotate == 270:
-                    r_x, r_y = height - y - 1, width - x - 1
-
+                    r_x, r_y = height - y - 1, width - x - 1 
+                
                 cell = self.picture[r_y][r_x]
+                color = self.list_to_hex(cell)
+
                 fltk.rectangle(
                     x * self.pixel_size,
                     y * self.pixel_size,
                     (x + 1) * self.pixel_size,
                     (y + 1) * self.pixel_size,
-                    couleur=cell,
-                    remplissage=cell,
+                    couleur=color,
+                    remplissage=color,
                 )
 
         tev = None
@@ -70,6 +72,31 @@ class Bitmap:
         fltk.ferme_fenetre()
         if re_open:
             self.build()
+    
+    def int_to_hex(self, nb: int):
+        """Convernt an integer value to it's hexadecimal value
+
+        :param nb: the number to convert
+        :type nb: int
+        :param max_value: maximum value, defaults to 1
+        :type max_value: int, optional
+        :return: the hex number
+        :rtype: str
+        
+        >>> int_to_hex(0)
+        '0'
+        >>> int_to_hex(40)
+        '28'
+        >>> int_to_hex(255)
+        'ff'
+        """
+        nb = hex(nb)[2:]
+        if len(nb) == 1:
+            nb = '0' + nb
+        return nb
+    
+    def list_to_hex(self, lst: list[int]):
+        return '#' + ''.join([self.int_to_hex(n) for n in lst])
 
 
 def parse_args():

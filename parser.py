@@ -108,9 +108,9 @@ class Parser:
                                 current_width = 0
                                 self["picture"].append([])
                             if car == "0":
-                                self["picture"][-1].append("#ffffff")
+                                self["picture"][-1].append([0, 0, 0])
                             else:
-                                self["picture"][-1].append("#000000")
+                                self["picture"][-1].append([255, 255, 255])
                             current_width += 1
                     else:
                         for byte in list(line):
@@ -131,9 +131,9 @@ class Parser:
                                     # which are '0100', and don't continue
                                     # by adding to the next line '0001'
                                 if nb == "0":
-                                    self["picture"][-1].append("#ffffff")
+                                    self["picture"][-1].append([0, 0, 0])
                                 else:
-                                    self["picture"][-1].append("#000000")
+                                    self["picture"][-1].append([255, 255, 255])
                                 current_width += 1
 
     def parse_pgm(self):
@@ -179,13 +179,8 @@ class Parser:
                         if current_width == width:
                             current_width = 0
                             self["picture"].append([])
-                        self["picture"][-1].append(
-                            "#"
-                            + self.int_to_hex(
-                                int(car), self["maximum color value"]
-                            )
-                            * 3
-                        )
+                        b = self.balance(int(car), self["maximum color value"])
+                        self["picture"][-1].append([b, b, b])
                         current_width += 1
 
     def parse_ppm(self):
@@ -224,41 +219,29 @@ class Parser:
                         iterable = line.decode().rstrip().split()
                     else:
                         iterable = list(line)
-                    hx = "#"
+                    temp = []
                     rgb_counter = 0
                     for car in iterable:
                         if current_width == width:
                             current_width = 0
                             self["picture"].append([])
-                        hx += self.int_to_hex(
-                            int(car), self["maximum color value"]
-                        )
+                        temp.append(self.balance(int(car), self["maximum color value"]))
                         rgb_counter += 1
                         if rgb_counter == 3:
                             rgb_counter = 0
-                            self["picture"][-1].append(hx)
+                            self["picture"][-1].append(temp)
                             current_width += 1
-                            hx = "#"
+                            temp = []
 
-    def int_to_hex(self, nb: int, max_value: int = 1):
-        """Convernt an integer value to it's hexadecimal value
+    def balance(self, n: int, max_value: int = 1):
+        """Rebalance a number to get its value between 0 and 255
+        (depending on its maximum possible value)
 
-        :param nb: the number to convert
-        :type nb: int
-        :param max_value: maximum value, defaults to 1
+        :param n: the number to rebalance
+        :type n: int
+        :param max_value: the maximum value of the number, defaults to 1
         :type max_value: int, optional
-        :return: the hex number
-        :rtype: str
-        
-        >>> int_to_hex(0)
-        '0'
-        >>> int_to_hex(40)
-        '28'
-        >>> int_to_hex(255)
-        'ff'
+        :return: the rebalanced number
+        :rtype: int
         """
-        nb = (nb / max_value) * 255
-        nb = hex(int(nb))[2:]
-        if len(nb) == 1:
-            nb = "0" + nb
-        return nb
+        return int((n / max_value) * 255)
