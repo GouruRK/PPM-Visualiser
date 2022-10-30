@@ -1,6 +1,6 @@
 # Bitmap Visualiser
 
-This is one of my very first school project, in association with [Gabriel Heude](https://github.com/ScartoLeni).
+This is one of my very first school project, which was firstly made in association with [Gabriel Heude](https://github.com/ScartoLeni).
 
 You can find the original subject [here](original%20subject.md).
 
