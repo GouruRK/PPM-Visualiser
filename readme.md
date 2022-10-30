@@ -1,6 +1,8 @@
 # Bitmap Visualiser
 
-This is one of my very first school project. You can find the original subject [here](original%20subject.md).
+This is one of my very first school project, in association with [Gabriel Heude](https://github.com/ScartoLeni).
+
+You can find the original subject [here](original%20subject.md).
 
 
 
@@ -30,7 +32,7 @@ cd PPM-Visualiser
 python3 main.py <file>
 ```
 
-You can add some optionnal argument in command line :
+Optionnals arguments :
 
 ```bash
 # Show help message
@@ -55,11 +57,11 @@ python3 main.py <file> -c <P1 | P2 | P3 | P4 | P5 | P5>
 python3 main.py <file> -c <P1 | P2 | P3 | P4 | P5 | P5> -o <name>
 ```
 
-Note that windows user may type `py` instead of `python3`/
+Note that windows user may type `py` instead of `python3`
 
 ## Next step ?
 
-As indicated in the original subject, there are many ways to improve this project (this improvement may come latly), but here are some of them :
+As indicated in the original subject, there are many ways to improve this project (this improvement may come lately), but here are some of them :
 * Add color filters
 * Enable the user to modify the file directly from the screen and saved it as a new file
 
